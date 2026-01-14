@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=Galactic Directory
+PRODUCT_BUNDLE_IDENTIFIER=com.skash.galacticdirectory.GalacticDirectory$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
