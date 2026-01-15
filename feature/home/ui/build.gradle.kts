@@ -9,5 +9,6 @@ kotlin {
 
     sourceSets.commonMain.dependencies {
         implementation(projects.feature.home.presentation)
+        implementation("androidx.paging:paging-compose:3.4.0-rc01")
     }
 }

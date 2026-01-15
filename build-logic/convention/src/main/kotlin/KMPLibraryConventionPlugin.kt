@@ -22,11 +22,6 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
                     minSdk = MIN_SDK
                 }
 
-                iosX64 {
-                    binaries.framework {
-                        baseName = xcFrameworkName
-                    }
-                }
                 iosArm64 {
                     binaries.framework {
                         baseName = xcFrameworkName

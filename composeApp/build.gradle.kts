@@ -44,6 +44,12 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
+            implementation(projects.data)
+            implementation(projects.domain)
+
+            implementation(libs.forge.network.ktor)
+
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)

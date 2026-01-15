@@ -22,7 +22,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.skash.galacticdirectory.designsystem.component.BottomNavigationBar
+import com.skash.galacticdirectory.designsystem.component.template.Screen
 import com.skash.galacticdirectory.navigation.BottomNavItem
+import com.skash.galacticdirectory.navigation.Screen
 import com.skash.galacticdirectory.navigation.TopLevelScreen
 import com.skash.galacticdirectory.navigation.topLevelGraph
 import com.skash.galacticdirectory.resources.Res
@@ -53,7 +55,7 @@ internal fun MainScreen(
         findSelectedTab(APP_TABS, navBackStackEntry?.destination)
     }
 
-    Scaffold(
+    Screen(
         bottomBar = {
             AppBottomBar(APP_TABS, selectedTab) {
                 navigateTab(bottomNavController, it)
