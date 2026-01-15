@@ -78,6 +78,7 @@ forge-usecase = { module = "com.skash.forge:usecase", version.ref = "forge" }
 forge-viewmodel = { module = "com.skash.forge:viewmodel", version.ref = "forge" }
 forge-navigation-api = { module = "com.skash.forge:navigation-api", version.ref = "forge" }
 forge-navigation-nav2 = { module = "com.skash.forge:navigation-nav2", version.ref = "forge" }
+forge-event = { module = "com.skash.forge:event", version.ref = "forge" }
 
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koinBom" }
@@ -102,3 +103,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 # Internal Plugins
 galactic-kmp-library = { id = "galactic.kmp.library" }
 galactic-compose-library = { id = "galactic.compose.library" }
+galactic-ui-library = { id = "galactic.ui.library" }
+galactic-presentation-library = { id = "galactic.presentation.library" }

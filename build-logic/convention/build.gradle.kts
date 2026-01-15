@@ -35,5 +35,21 @@ gradlePlugin {
                     .pluginId
             implementationClass = "ComposeLibraryConventionPlugin"
         }
+
+        register("uiLibrary") {
+            id =
+                libs.plugins.galactic.ui.library
+                    .get()
+                    .pluginId
+            implementationClass = "UIFeatureConventionPlugin"
+        }
+
+        register("presentationLibrary") {
+            id =
+                libs.plugins.galactic.presentation.library
+                    .get()
+                    .pluginId
+            implementationClass = "PresentationFeatureConventionPlugin"
+        }
     }
 }

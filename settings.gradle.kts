@@ -1,12 +1,9 @@
 import java.util.Properties
 
-include(":core:resource")
+include(":core:event")
 
 
-include(":core:designsystem")
-
-
-include(":core:navigation")
+include(":core:viewmodel")
 
 
 rootProject.name = "GalacticDirectory"
@@ -61,3 +58,8 @@ include(":composeApp")
 include(":androidApp")
 include(":domain")
 include(":data")
+include(":feature:home:ui")
+include(":feature:home:presentation")
+include(":core:resource")
+include(":core:designsystem")
+include(":core:navigation")

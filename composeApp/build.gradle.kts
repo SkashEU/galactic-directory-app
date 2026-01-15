@@ -30,6 +30,11 @@ kotlin {
         }
         commonMain.dependencies {
 
+            implementation(projects.feature.home.presentation)
+            implementation(projects.feature.home.ui)
+
+            implementation(projects.core.event)
+            implementation(libs.forge.event)
             implementation(libs.forge.navigation.nav2)
             implementation(libs.navigation.compose)
             implementation(projects.core.navigation)
