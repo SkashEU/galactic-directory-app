@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.skash.galacticdirectory.data.database.AppDatabase
 import com.skash.galacticdirectory.data.database.dao.PersonDao
 import com.skash.galacticdirectory.data.database.dao.RemoteKeysDao
 import com.skash.galacticdirectory.data.mapper.toCharacter
@@ -17,19 +18,17 @@ import kotlinx.coroutines.flow.map
 
 class CharacterRepositoryImpl(
     private val swapiService: SwapiService,
-    private val remoteKeysDao: RemoteKeysDao,
-    private val personDao: PersonDao
+    private val database: AppDatabase
 ) : CharacterRepository {
     @OptIn(ExperimentalPagingApi::class)
     override fun getPaginatedCharacter(query: String): Flow<PagingData<Character>> {
         return Pager(
-            config = PagingConfig(20),
+            config = PagingConfig(pageSize = 10, initialLoadSize = 20, prefetchDistance = 10),
             remoteMediator = PeopleRemoteMediator(
                 swapiService = swapiService,
-                personDao = personDao,
-                remoteKeysDao = remoteKeysDao
+                database = database
             ),
-            pagingSourceFactory = { personDao.pagingSource() }
+            pagingSourceFactory = { database.getPersonDao().pagingSource() }
         ).flow.map { pagingData ->
             pagingData.map { personEntity ->
                 personEntity.toCharacter()

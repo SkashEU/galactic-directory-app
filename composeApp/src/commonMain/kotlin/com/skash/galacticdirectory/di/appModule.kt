@@ -34,7 +34,7 @@ val appModule = module {
 
     viewModelOf(::HomeViewModel)
 
-    single<CharacterRepository> { CharacterRepositoryImpl(get(), get(), get()) }
+    single<CharacterRepository> { CharacterRepositoryImpl(get(), get()) }
 
     factory { GetCharactersUseCase(get()) }
 }

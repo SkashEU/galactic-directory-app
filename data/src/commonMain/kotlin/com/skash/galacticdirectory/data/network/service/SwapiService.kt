@@ -11,7 +11,7 @@ class SwapiService(
 ) {
     suspend fun getPeople(page: Int): ApiResponse<PeopleListResponse> {
         return httpClient.execute<PeopleListResponse, PeopleListResponse>(
-            mapper = {it},
+            mapper = { it },
             requestBuilder = {
                 get(Endpoint.People)
                 parameters {
