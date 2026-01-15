@@ -25,7 +25,10 @@ fun CharacterCard(
     onClick: () -> Unit
 ) {
 
-    ElevatedCard(modifier = Modifier.fillMaxWidth().then(modifier)) {
+    ElevatedCard(
+        modifier = Modifier.fillMaxWidth().then(modifier),
+        onClick = onClick
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(Spacing.Small),
             verticalAlignment = Alignment.CenterVertically

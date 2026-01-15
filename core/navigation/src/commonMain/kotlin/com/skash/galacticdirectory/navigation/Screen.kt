@@ -9,7 +9,5 @@ sealed interface Screen {
     data object Graph : Screen
 
     @Serializable
-    data class Details(val personId: Long) : Screen
-
-
+    data class Details(val characterId: Int) : Screen
 }

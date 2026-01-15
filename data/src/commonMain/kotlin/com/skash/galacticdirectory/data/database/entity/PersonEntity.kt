@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class PersonEntity(
     @PrimaryKey val id: Int,
     val name: String,
-    val height: String
+    val birthYear: String
 )

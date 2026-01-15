@@ -8,5 +8,14 @@ sealed class Endpoint(
     segment: String
 ) : Route(parent, segment) {
 
-    data object People : Endpoint(segment = "people")
+    data object People : Endpoint(segment = "people"){
+        data class Details(val id: Int): Endpoint(parent = this, segment = "$id")
+    }
+    data object Planet : Endpoint(segment = "planets") {
+        data class Details(val id: Int): Endpoint(parent = this, segment = "$id")
+    }
+    data object Species : Endpoint(segment = "species") {
+        data class Details(val id: Int): Endpoint(parent = this, segment = "$id")
+    }
+
 }

@@ -7,16 +7,23 @@ import com.skash.forge.navigation.nav2.DefaultNavigationDispatcher
 import com.skash.forge.network.client.HttpClient
 import com.skash.forge.network.ktor.KtorApiClient
 import com.skash.galacticdirectory.data.database.AppDatabase
-import com.skash.galacticdirectory.data.database.dao.PersonDao
+import com.skash.galacticdirectory.data.database.dao.CharacterDao
 import com.skash.galacticdirectory.data.database.dao.RemoteKeysDao
 import com.skash.galacticdirectory.data.database.getRoomDatabase
 import com.skash.galacticdirectory.data.network.service.SwapiService
 import com.skash.galacticdirectory.data.repository.CharacterRepositoryImpl
+import com.skash.galacticdirectory.data.repository.PlanetRepositoryImpl
+import com.skash.galacticdirectory.data.repository.SpeciesRepositoryImpl
+import com.skash.galacticdirectory.detail.presentation.DetailViewModel
 import com.skash.galacticdirectory.domain.repository.CharacterRepository
+import com.skash.galacticdirectory.domain.repository.PlanetRepository
+import com.skash.galacticdirectory.domain.repository.SpeciesRepository
+import com.skash.galacticdirectory.domain.usecase.GetCharacterWithDetailsUseCase
 import com.skash.galacticdirectory.domain.usecase.GetCharactersUseCase
+import com.skash.galacticdirectory.domain.usecase.ToggleFavoriteCharacterUseCase
 import com.skash.galacticdirectory.event.UIEvent
 import com.skash.galacticdirectory.feature.home.presentation.HomeViewModel
-import org.koin.core.module.dsl.viewModel
+import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -24,17 +31,36 @@ val appModule = module {
     single<NavigationDispatcher> { DefaultNavigationDispatcher() }
     single<EventBus<UIEvent>> { DefaultEventBus() }
 
-    single<HttpClient> { KtorApiClient().client }
-
-    single<SwapiService> { SwapiService(get()) }
+    single<HttpClient> {
+        KtorApiClient {
+            json(Json {
+                coerceInputValues = true
+                ignoreUnknownKeys = true
+            })
+        }.client
+    }
+    single<SwapiService> { SwapiService(httpClient = get()) }
 
     single<AppDatabase> { AppDatabase.getRoomDatabase() }
-    single<PersonDao> { get<AppDatabase>().getPersonDao() }
+    single<CharacterDao> { get<AppDatabase>().getPersonDao() }
     single<RemoteKeysDao> { get<AppDatabase>().getRemoteKeysDao() }
 
+    single<CharacterRepository> { CharacterRepositoryImpl(swapiService = get(), database = get()) }
+    single<PlanetRepository> { PlanetRepositoryImpl(swapiService = get()) }
+    single<SpeciesRepository> { SpeciesRepositoryImpl(swapiService = get()) }
+
+    factory { GetCharactersUseCase(characterRepository = get()) }
+    factory {
+        GetCharacterWithDetailsUseCase(
+            characterRepository = get(),
+        )
+    }
+    factory {
+        ToggleFavoriteCharacterUseCase(
+            characterRepository = get(),
+        )
+    }
+
     viewModelOf(::HomeViewModel)
-
-    single<CharacterRepository> { CharacterRepositoryImpl(get(), get()) }
-
-    factory { GetCharactersUseCase(get()) }
+    viewModelOf(::DetailViewModel)
 }

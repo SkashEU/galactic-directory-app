@@ -19,7 +19,8 @@ import kotlinx.coroutines.flow.Flow
 internal fun HomePage(
     query: String,
     pagingData: Flow<PagingData<Character>>,
-    onQueryChange: (String) -> Unit
+    onQueryChange: (String) -> Unit,
+    onCharacterClick: (Character) -> Unit
 ) {
 
     val pagedItems = pagingData.collectAsLazyPagingItems()
@@ -44,7 +45,7 @@ internal fun HomePage(
                 CharacterCard(
                     name = character.name,
                     birthYear = character.birthYear,
-                    onClick = {}
+                    onClick = { onCharacterClick(character) }
                 )
             }
         }

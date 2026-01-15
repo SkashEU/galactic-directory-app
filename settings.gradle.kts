@@ -1,9 +1,6 @@
 import java.util.Properties
 
-include(":core:event")
 
-
-include(":core:viewmodel")
 
 
 rootProject.name = "GalacticDirectory"
@@ -56,10 +53,17 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":androidApp")
+
 include(":domain")
 include(":data")
-include(":feature:home:ui")
-include(":feature:home:presentation")
+
 include(":core:resource")
 include(":core:designsystem")
 include(":core:navigation")
+include(":core:event")
+include(":core:viewmodel")
+
+include(":feature:detail:ui")
+include(":feature:detail:presentation")
+include(":feature:home:ui")
+include(":feature:home:presentation")

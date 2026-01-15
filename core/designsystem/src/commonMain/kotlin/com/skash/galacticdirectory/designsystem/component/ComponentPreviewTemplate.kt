@@ -15,7 +15,7 @@ import com.skash.galacticdirectory.designsystem.theme.AppTheme
 fun ComponentPreviewTemplate(
     content: @Composable ColumnScope.() -> Unit
 ) {
-    AppTheme {
+    AppTheme(darkTheme = true) {
         Surface(color = MaterialTheme.colorScheme.background) {
             Column(modifier = Modifier.fillMaxSize()) { content() }
         }

@@ -34,6 +34,7 @@ private fun HomeScreenImpl(
     HomePage(
         query = state.query,
         pagingData = pagingData,
-        onQueryChange = { executeIntent(HomeState.Intent.SetQuery(it)) }
+        onQueryChange = { executeIntent(HomeState.Intent.SetQuery(it)) },
+        onCharacterClick = { executeIntent(HomeState.Intent.NavigateToDetails(it.id)) }
     )
 }

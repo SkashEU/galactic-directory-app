@@ -6,5 +6,6 @@ data class HomeState(
 
     sealed interface Intent{
         data class SetQuery(val query: String): Intent
+        data class NavigateToDetails(val id: Int): Intent
     }
 }

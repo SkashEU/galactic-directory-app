@@ -16,7 +16,8 @@ class PresentationFeatureConventionPlugin : Plugin<Project> {
                             ":core:resource",
                             ":domain",
                             ":core:event",
-                            ":core:viewmodel"
+                            ":core:viewmodel",
+                            ":core:navigation"
                         ).forEach { module ->
                             api(project(module))
                         }

@@ -7,14 +7,13 @@ import androidx.paging.RemoteMediator
 import androidx.room.useWriterConnection
 import com.skash.forge.network.response.ApiResponse
 import com.skash.galacticdirectory.data.database.AppDatabase
-import com.skash.galacticdirectory.data.database.dao.PersonDao
-import com.skash.galacticdirectory.data.database.dao.RemoteKeysDao
 import com.skash.galacticdirectory.data.database.entity.PersonEntity
 import com.skash.galacticdirectory.data.database.entity.RemoteKeys
 import com.skash.galacticdirectory.data.network.service.SwapiService
 
 @OptIn(ExperimentalPagingApi::class)
 class PeopleRemoteMediator(
+    private val query: String,
     private val swapiService: SwapiService,
     private val database: AppDatabase
 ) : RemoteMediator<Int, PersonEntity>() {
@@ -43,7 +42,7 @@ class PeopleRemoteMediator(
             }
         }
 
-        return when (val apiResponse = swapiService.getPeople(page)) {
+        return when (val apiResponse = swapiService.getPeople(query = query, page = page)) {
             is ApiResponse.Error -> MediatorResult.Error(Exception(apiResponse.reason))
             is ApiResponse.Success -> {
                 val people = apiResponse.body
@@ -66,7 +65,7 @@ class PeopleRemoteMediator(
                         PersonEntity(
                             id = extractIdFromUrl(personDto.url),
                             name = personDto.name,
-                            height = personDto.height
+                            birthYear = personDto.birthYear
                         )
                     }
 
