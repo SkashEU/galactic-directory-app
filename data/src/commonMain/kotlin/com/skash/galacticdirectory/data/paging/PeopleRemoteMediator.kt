@@ -42,9 +42,7 @@ class PeopleRemoteMediator(
             }
         }
 
-        val apiResponse = swapiService.getPeople(page)
-
-        return when (apiResponse) {
+        return when (val apiResponse = swapiService.getPeople(page)) {
             is ApiResponse.Error -> MediatorResult.Error(Exception(apiResponse.reason))
             is ApiResponse.Success -> {
                 val people = apiResponse.body

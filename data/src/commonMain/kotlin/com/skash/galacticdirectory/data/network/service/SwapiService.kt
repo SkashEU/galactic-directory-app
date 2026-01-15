@@ -15,7 +15,7 @@ class SwapiService(
             requestBuilder = {
                 get(Endpoint.People)
                 parameters {
-                    "page" to page
+                    put("page", page.toString())
                 }
             }
         )
