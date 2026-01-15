@@ -14,7 +14,7 @@ class GetCharacterWithDetailsUseCase(
     override suspend fun FlowCollector<Outcome<CharacterWithDetails, ErrorType>>.execute(
         params: Int
     ) {
-        characterRepository.getCharacterDetailsAsFlow(params)
+        characterRepository.observeCharacterDetails(params)
             .catch { e ->
                 emit(Outcome.Failure(ErrorType.DetailsFetchFailed))
             }

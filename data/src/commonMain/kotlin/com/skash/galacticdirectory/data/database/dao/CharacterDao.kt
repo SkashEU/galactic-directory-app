@@ -66,6 +66,10 @@ interface CharacterDao {
     @Query("UPDATE detailed_characters SET isFavorite = :isFavorite WHERE id = :id")
     suspend fun updateFavoriteStatus(id: Int, isFavorite: Boolean)
 
+    @Transaction
+    @Query("SELECT * FROM detailed_characters WHERE isFavorite = 1")
+    fun getFavoriteCharactersAsFlow(): Flow<List<CharacterWithDetailsRelation>>
+
     @Query("DELETE FROM people")
     suspend fun clear()
 

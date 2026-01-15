@@ -36,6 +36,9 @@ kotlin {
             implementation(projects.feature.detail.presentation)
             implementation(projects.feature.detail.ui)
 
+            implementation(projects.feature.favorites.presentation)
+            implementation(projects.feature.favorites.ui)
+
             implementation(projects.core.event)
             implementation(libs.forge.event)
             implementation(libs.forge.navigation.nav2)

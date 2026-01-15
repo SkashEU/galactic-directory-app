@@ -47,11 +47,18 @@ class CharacterRepositoryImpl(
         }
     }
 
-    override fun getCharacterDetailsAsFlow(id: Int): Flow<CharacterWithDetails> {
+    override fun observeCharacterDetails(id: Int): Flow<CharacterWithDetails> {
         return database.getPersonDao().getCharacterWithDetailsAsFlow(id)
             .filterNotNull()
             .map { it.toDomain() }
             .onStart { refreshCharacterDetails(id) }
+    }
+
+    override fun observeFavorites(): Flow<List<CharacterWithDetails>> {
+        return database.getPersonDao().getFavoriteCharactersAsFlow()
+            .map { relations ->
+                relations.map { it.toDomain() }
+            }
     }
 
     override suspend fun setFavorite(id: Int, isFavorite: Boolean) {

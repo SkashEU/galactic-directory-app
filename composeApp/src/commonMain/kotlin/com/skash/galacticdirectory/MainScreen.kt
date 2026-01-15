@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -112,5 +113,7 @@ private fun findSelectedTab(
     tabs: List<BottomNavItem>,
     currentDestination: NavDestination?
 ): BottomNavItem = tabs.find { tab ->
-    currentDestination?.hierarchy?.any { it.route == tab.route::class.qualifiedName } == true
+    currentDestination?.hierarchy?.any {
+        it.hasRoute(tab.route::class)
+    } == true
 } ?: tabs.first()

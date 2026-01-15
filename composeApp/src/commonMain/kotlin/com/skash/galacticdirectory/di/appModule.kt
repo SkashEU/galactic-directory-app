@@ -20,8 +20,11 @@ import com.skash.galacticdirectory.domain.repository.PlanetRepository
 import com.skash.galacticdirectory.domain.repository.SpeciesRepository
 import com.skash.galacticdirectory.domain.usecase.GetCharacterWithDetailsUseCase
 import com.skash.galacticdirectory.domain.usecase.GetCharactersUseCase
+import com.skash.galacticdirectory.domain.usecase.GetFavoritesUseCase
 import com.skash.galacticdirectory.domain.usecase.ToggleFavoriteCharacterUseCase
 import com.skash.galacticdirectory.event.UIEvent
+import com.skash.galacticdirectory.feature.favorites.presentation.FavoritesViewModel
+import com.skash.galacticdirectory.feature.favorites.ui.FavoritesScreen
 import com.skash.galacticdirectory.feature.home.presentation.HomeViewModel
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
@@ -50,6 +53,7 @@ val appModule = module {
     single<SpeciesRepository> { SpeciesRepositoryImpl(swapiService = get()) }
 
     factory { GetCharactersUseCase(characterRepository = get()) }
+    factory { GetFavoritesUseCase(characterRepository = get()) }
     factory {
         GetCharacterWithDetailsUseCase(
             characterRepository = get(),
@@ -63,4 +67,6 @@ val appModule = module {
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::DetailViewModel)
+    viewModelOf(::FavoritesViewModel)
+
 }

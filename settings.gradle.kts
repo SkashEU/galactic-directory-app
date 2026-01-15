@@ -1,8 +1,5 @@
 import java.util.Properties
 
-
-
-
 rootProject.name = "GalacticDirectory"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -67,3 +64,5 @@ include(":feature:detail:ui")
 include(":feature:detail:presentation")
 include(":feature:home:ui")
 include(":feature:home:presentation")
+include(":feature:favorites:presentation")
+include(":feature:favorites:ui")

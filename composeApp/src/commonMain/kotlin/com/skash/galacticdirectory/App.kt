@@ -1,6 +1,8 @@
 package com.skash.galacticdirectory
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +34,7 @@ fun App() {
         rootNavController.CollectNavigationEvents(navigationDispatcher)
 
         AppTheme {
-            DefaultNavHost(
+            NavHost(
                 navController = rootNavController,
                 startDestination = TopLevelScreen.Graph
             ) {
