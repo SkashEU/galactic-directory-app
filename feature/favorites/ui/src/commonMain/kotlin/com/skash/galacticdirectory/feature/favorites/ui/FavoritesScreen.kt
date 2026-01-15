@@ -32,7 +32,8 @@ private fun HomeScreenImpl(
         true -> EmptyFavoritesPage()
         false -> FavoritesPage(
             favorites = state.favorites,
-            onCharacterClick = { executeIntent(FavoritesState.Intent.NavigateToDetails(it)) }
+            onCharacterClick = { executeIntent(FavoritesState.Intent.NavigateToDetails(it)) },
+            onToggleFavorite = {executeIntent(FavoritesState.Intent.ToggleIsFavorite(it))}
         )
     }
 }

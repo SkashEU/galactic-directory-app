@@ -30,11 +30,13 @@ import com.skash.galacticdirectory.designsystem.component.MetaTag
 import com.skash.galacticdirectory.designsystem.component.template.PageWithPaddingSlot
 import com.skash.galacticdirectory.designsystem.theme.Spacing
 import com.skash.galacticdirectory.domain.model.CharacterWithDetails
+import com.skash.galacticdirectory.domain.model.DetailedCharacter
 
 @Composable
 internal fun FavoritesPage(
     favorites: List<CharacterWithDetails>,
-    onCharacterClick: (Int) -> Unit
+    onCharacterClick: (Int) -> Unit,
+    onToggleFavorite: (DetailedCharacter) -> Unit
 ) {
 
     PageWithPaddingSlot { contentPadding ->
@@ -47,8 +49,8 @@ internal fun FavoritesPage(
             items(favorites) { character ->
                 FavoriteCharacterCard(
                     character = character,
-                    onClick = {onCharacterClick(character.detailedCharacter.id)},
-                    onToggleFavorite = {  }
+                    onClick = { onCharacterClick(character.detailedCharacter.id) },
+                    onToggleFavorite = { onToggleFavorite(character.detailedCharacter) }
                 )
             }
         }
