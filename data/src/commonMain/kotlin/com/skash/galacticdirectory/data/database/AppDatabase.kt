@@ -29,7 +29,7 @@ import kotlinx.coroutines.IO
 )
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getPersonDao(): CharacterDao
+    abstract fun getCharacterDao(): CharacterDao
     abstract fun getRemoteKeysDao(): RemoteKeysDao
 
     companion object

@@ -40,7 +40,7 @@ internal val appModule = module {
     single<SwapiService> { SwapiService(httpClient = get()) }
 
     single<AppDatabase> { AppDatabase.getRoomDatabase() }
-    single<CharacterDao> { get<AppDatabase>().getPersonDao() }
+    single<CharacterDao> { get<AppDatabase>().getCharacterDao() }
     single<RemoteKeysDao> { get<AppDatabase>().getRemoteKeysDao() }
 
     single<CharacterRepository> { CharacterRepositoryImpl(swapiService = get(), database = get()) }

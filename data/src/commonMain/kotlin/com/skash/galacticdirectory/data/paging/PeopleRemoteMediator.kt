@@ -51,7 +51,7 @@ class PeopleRemoteMediator(
                 database.useWriterConnection {
                     if (loadType == LoadType.REFRESH) {
                         database.getRemoteKeysDao().clearRemoteKeys()
-                        database.getPersonDao().clear()
+                        database.getCharacterDao().clear()
                     }
 
                     val prevKey = if (page == 1) null else page - 1
@@ -70,7 +70,7 @@ class PeopleRemoteMediator(
                     }
 
                     database.getRemoteKeysDao().insertAll(keys)
-                    database.getPersonDao().insertAll(entities)
+                    database.getCharacterDao().insertAll(entities)
                 }
 
                 return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)

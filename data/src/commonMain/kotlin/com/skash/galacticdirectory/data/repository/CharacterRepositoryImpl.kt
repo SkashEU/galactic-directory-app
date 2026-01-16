@@ -20,7 +20,6 @@ import com.skash.galacticdirectory.domain.model.Planet
 import com.skash.galacticdirectory.domain.model.Species
 import com.skash.galacticdirectory.domain.repository.CharacterRepository
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -40,7 +39,7 @@ class CharacterRepositoryImpl(
                 swapiService = swapiService,
                 database = database
             ),
-            pagingSourceFactory = { database.getPersonDao().pagingSource(query) }
+            pagingSourceFactory = { database.getCharacterDao().pagingSource(query) }
         ).flow.map { pagingData ->
             pagingData.map { personEntity ->
                 personEntity.toDomain()
@@ -49,28 +48,28 @@ class CharacterRepositoryImpl(
     }
 
     override fun observeCharacterDetails(id: Int): Flow<CharacterWithDetails> {
-        return database.getPersonDao().getCharacterWithDetailsAsFlow(id)
+        return database.getCharacterDao().getCharacterWithDetailsAsFlow(id)
             .filterNotNull()
             .map { it.toDomain() }
             .onStart { refreshCharacterDetails(id) }
     }
 
     override fun observeFavorites(): Flow<List<CharacterWithDetails>> {
-        return database.getPersonDao().getFavoriteCharactersAsFlow()
+        return database.getCharacterDao().getFavoriteCharactersAsFlow()
             .map { relations ->
                 relations.map { it.toDomain() }
             }
     }
 
     override suspend fun setFavorite(id: Int, isFavorite: Boolean) {
-        database.getPersonDao().updateFavoriteStatus(id, isFavorite)
+        database.getCharacterDao().updateFavoriteStatus(id, isFavorite)
     }
 
     private suspend fun refreshCharacterDetails(characterId: Int) {
         val characterResponse = swapiService.getCharacterById(characterId)
 
         // Dirty throw to simplify UI State handling
-        if (characterResponse !is ApiResponse.Success && database.getPersonDao()
+        if (characterResponse !is ApiResponse.Success && database.getCharacterDao()
                 .getCharacterWithDetails(characterId) == null
         ) {
             throw EntityNotCachedException()
@@ -119,12 +118,12 @@ class CharacterRepositoryImpl(
         species: List<Species>
     ) {
         val isFavorite =
-            database.getPersonDao().getCharacterWithDetails(charId)?.character?.isFavorite ?: false
+            database.getCharacterDao().getCharacterWithDetails(charId)?.character?.isFavorite ?: false
 
         val charEntity = details.toEntity(isFavorite)
         val planetEntity = planet?.toEntity()
         val speciesEntities = species.map { it.toEntity() }
 
-        database.getPersonDao().saveCharacterWithDetails(charEntity, planetEntity, speciesEntities)
+        database.getCharacterDao().saveCharacterWithDetails(charEntity, planetEntity, speciesEntities)
     }
 }
