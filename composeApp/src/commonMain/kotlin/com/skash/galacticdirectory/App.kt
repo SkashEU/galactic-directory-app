@@ -1,47 +1,51 @@
 package com.skash.galacticdirectory
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import androidx.navigation.compose.rememberNavController
+import com.skash.forge.navigation.NavigationDispatcher
+import com.skash.forge.navigation.nav2.CollectNavigationEvents
+import com.skash.forge.navigation.nav2.DefaultNavHost
+import com.skash.galacticdirectory.designsystem.theme.AppTheme
+import com.skash.galacticdirectory.di.appModule
+import com.skash.galacticdirectory.navigation.Screen
+import com.skash.galacticdirectory.navigation.TopLevelScreen
+import com.skash.galacticdirectory.navigation.appGraph
+import org.koin.compose.KoinMultiplatformApplication
+import org.koin.compose.koinInject
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.dsl.koinConfiguration
 
-import galacticdirectory.composeapp.generated.resources.Res
-import galacticdirectory.composeapp.generated.resources.compose_multiplatform
-
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-@Preview
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+    KoinMultiplatformApplication(
+        config = koinConfiguration {
+            modules(appModule)
+        }
+    ) {
+
+        val rootNavController = rememberNavController()
+        val bottomNavController = rememberNavController()
+        val navigationDispatcher = koinInject<NavigationDispatcher>()
+        rootNavController.CollectNavigationEvents(navigationDispatcher)
+
+        AppTheme {
+            NavHost(
+                navController = rootNavController,
+                startDestination = TopLevelScreen.Graph
+            ) {
+                navigation<Screen.Graph>(
+                    startDestination = Screen.Details(1)
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    appGraph()
+                }
+
+                composable<TopLevelScreen.Graph> {
+                    MainScreen(bottomNavController)
                 }
             }
         }
