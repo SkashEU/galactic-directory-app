@@ -16,6 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 import com.skash.galacticdirectory.designsystem.theme.Spacing
+import com.skash.galacticdirectory.resources.Res
+import com.skash.galacticdirectory.resources.detail_stat_birth_year
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CharacterCard(
@@ -35,7 +38,7 @@ fun CharacterCard(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = name, style = MaterialTheme.typography.titleMedium)
-                Text(text = "Birth Year: $birthYear", style = MaterialTheme.typography.bodySmall)
+                Text(text = "${stringResource(Res.string.detail_stat_birth_year)}: $birthYear", style = MaterialTheme.typography.bodySmall)
             }
 
             Icon(Icons.Default.ChevronRight, contentDescription = null)
