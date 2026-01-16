@@ -22,15 +22,13 @@ fun <T> CardRowList(
     OutlinedCard(
         modifier = Modifier.fillMaxWidth().then(modifier)
     ) {
-        Column {
-            items.forEachIndexed { index, item ->
-                content(item)
-                if (index < items.lastIndex) {
-                    HorizontalDivider(
-                        thickness = 1.dp,
-                        modifier = Modifier.padding(horizontal = Spacing.Medium)
-                    )
-                }
+        items.forEachIndexed { index, item ->
+            content(item)
+            if (index < items.lastIndex) {
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(horizontal = Spacing.Medium)
+                )
             }
         }
     }
