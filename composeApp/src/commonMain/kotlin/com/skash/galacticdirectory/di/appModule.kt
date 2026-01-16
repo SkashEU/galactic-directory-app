@@ -12,19 +12,14 @@ import com.skash.galacticdirectory.data.database.dao.RemoteKeysDao
 import com.skash.galacticdirectory.data.database.getRoomDatabase
 import com.skash.galacticdirectory.data.network.service.SwapiService
 import com.skash.galacticdirectory.data.repository.CharacterRepositoryImpl
-import com.skash.galacticdirectory.data.repository.PlanetRepositoryImpl
-import com.skash.galacticdirectory.data.repository.SpeciesRepositoryImpl
 import com.skash.galacticdirectory.detail.presentation.DetailViewModel
 import com.skash.galacticdirectory.domain.repository.CharacterRepository
-import com.skash.galacticdirectory.domain.repository.PlanetRepository
-import com.skash.galacticdirectory.domain.repository.SpeciesRepository
 import com.skash.galacticdirectory.domain.usecase.GetCharacterWithDetailsUseCase
 import com.skash.galacticdirectory.domain.usecase.GetCharactersUseCase
 import com.skash.galacticdirectory.domain.usecase.GetFavoritesUseCase
 import com.skash.galacticdirectory.domain.usecase.ToggleFavoriteCharacterUseCase
 import com.skash.galacticdirectory.event.UIEvent
 import com.skash.galacticdirectory.feature.favorites.presentation.FavoritesViewModel
-import com.skash.galacticdirectory.feature.favorites.ui.FavoritesScreen
 import com.skash.galacticdirectory.feature.home.presentation.HomeViewModel
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
@@ -49,24 +44,13 @@ internal val appModule = module {
     single<RemoteKeysDao> { get<AppDatabase>().getRemoteKeysDao() }
 
     single<CharacterRepository> { CharacterRepositoryImpl(swapiService = get(), database = get()) }
-    single<PlanetRepository> { PlanetRepositoryImpl(swapiService = get()) }
-    single<SpeciesRepository> { SpeciesRepositoryImpl(swapiService = get()) }
 
     factory { GetCharactersUseCase(characterRepository = get()) }
     factory { GetFavoritesUseCase(characterRepository = get()) }
-    factory {
-        GetCharacterWithDetailsUseCase(
-            characterRepository = get(),
-        )
-    }
-    factory {
-        ToggleFavoriteCharacterUseCase(
-            characterRepository = get(),
-        )
-    }
+    factory { GetCharacterWithDetailsUseCase(characterRepository = get()) }
+    factory { ToggleFavoriteCharacterUseCase(characterRepository = get()) }
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::DetailViewModel)
     viewModelOf(::FavoritesViewModel)
-
 }
