@@ -9,7 +9,7 @@ import com.skash.galacticdirectory.data.database.dao.CharacterDao
 import com.skash.galacticdirectory.data.database.dao.RemoteKeysDao
 import com.skash.galacticdirectory.data.database.entity.CharacterSpeciesCrossRef
 import com.skash.galacticdirectory.data.database.entity.DetailedCharacterEntity
-import com.skash.galacticdirectory.data.database.entity.PersonEntity
+import com.skash.galacticdirectory.data.database.entity.CharacterEntity
 import com.skash.galacticdirectory.data.database.entity.PlanetEntity
 import com.skash.galacticdirectory.data.database.entity.RemoteKeys
 import com.skash.galacticdirectory.data.database.entity.SpeciesEntity
@@ -18,7 +18,7 @@ import kotlinx.coroutines.IO
 
 @Database(
     entities = [
-        PersonEntity::class,
+        CharacterEntity::class,
         RemoteKeys::class,
         DetailedCharacterEntity::class,
         PlanetEntity::class,

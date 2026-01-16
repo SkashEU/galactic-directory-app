@@ -7,11 +7,11 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.skash.forge.network.response.ApiResponse
 import com.skash.galacticdirectory.data.database.AppDatabase
-import com.skash.galacticdirectory.data.mapper.toCharacter
 import com.skash.galacticdirectory.data.mapper.toDomain
 import com.skash.galacticdirectory.data.mapper.toEntity
 import com.skash.galacticdirectory.data.network.service.SwapiService
 import com.skash.galacticdirectory.data.paging.PeopleRemoteMediator
+import com.skash.galacticdirectory.data.util.collectAll
 import com.skash.galacticdirectory.domain.model.Character
 import com.skash.galacticdirectory.domain.model.CharacterWithDetails
 import com.skash.galacticdirectory.domain.model.DetailedCharacter
@@ -42,7 +42,7 @@ class CharacterRepositoryImpl(
             pagingSourceFactory = { database.getPersonDao().pagingSource(query) }
         ).flow.map { pagingData ->
             pagingData.map { personEntity ->
-                personEntity.toCharacter()
+                personEntity.toDomain()
             }
         }
     }
@@ -125,21 +125,5 @@ class CharacterRepositoryImpl(
         val speciesEntities = species.map { it.toEntity() }
 
         database.getPersonDao().saveCharacterWithDetails(charEntity, planetEntity, speciesEntities)
-    }
-}
-
-suspend fun <T> collectAll(
-    calls: List<suspend () -> ApiResponse<T>>
-): ApiResponse<List<T>> = coroutineScope {
-    val deferred = calls.map { async { it() } }
-    val results = deferred.awaitAll()
-    val firstError = results.filterIsInstance<ApiResponse.Error>().firstOrNull()
-
-    if (firstError != null) {
-        firstError
-    } else {
-        val bodies = results.map { (it as ApiResponse.Success).body }
-
-        ApiResponse.Success(bodies)
     }
 }

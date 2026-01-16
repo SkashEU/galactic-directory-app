@@ -9,7 +9,7 @@ import androidx.room.Transaction
 import com.skash.galacticdirectory.data.database.entity.CharacterSpeciesCrossRef
 import com.skash.galacticdirectory.data.database.entity.CharacterWithDetailsRelation
 import com.skash.galacticdirectory.data.database.entity.DetailedCharacterEntity
-import com.skash.galacticdirectory.data.database.entity.PersonEntity
+import com.skash.galacticdirectory.data.database.entity.CharacterEntity
 import com.skash.galacticdirectory.data.database.entity.PlanetEntity
 import com.skash.galacticdirectory.data.database.entity.SpeciesEntity
 import kotlinx.coroutines.flow.Flow
@@ -17,11 +17,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(people: List<PersonEntity>)
+    suspend fun insertAll(people: List<CharacterEntity>)
 
-    @Query("SELECT * FROM people WHERE name LIKE '%' || :query || '%' ORDER BY id ASC")
-    fun pagingSource(query: String): PagingSource<Int, PersonEntity>
-
+    @Query("SELECT * FROM characters WHERE name LIKE '%' || :query || '%' ORDER BY id ASC")
+    fun pagingSource(query: String): PagingSource<Int, CharacterEntity>
 
     @Transaction
     @Query("SELECT * FROM detailed_characters WHERE id = :characterId")
@@ -34,10 +33,10 @@ interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(character: DetailedCharacterEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPlanet(planet: PlanetEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertSpecies(species: List<SpeciesEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -70,7 +69,7 @@ interface CharacterDao {
     @Query("SELECT * FROM detailed_characters WHERE isFavorite = 1")
     fun getFavoriteCharactersAsFlow(): Flow<List<CharacterWithDetailsRelation>>
 
-    @Query("DELETE FROM people")
+    @Query("DELETE FROM characters")
     suspend fun clear()
 
 }

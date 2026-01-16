@@ -1,4 +1,4 @@
-package com.skash.galacticdirectory.designsystem.component
+package com.skash.galacticdirectory.designsystem.component.atom
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +17,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
+import com.skash.galacticdirectory.designsystem.theme.Spacing
 
 @Composable
 fun MetaTag(icon: ImageVector, text: String) {
@@ -24,10 +26,10 @@ fun MetaTag(icon: ImageVector, text: String) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            modifier = Modifier.size(14.dp),
+            modifier = Modifier.size(Spacing.Medium),
             tint = MaterialTheme.colorScheme.secondary
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(Spacing.ExtraSmall))
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,

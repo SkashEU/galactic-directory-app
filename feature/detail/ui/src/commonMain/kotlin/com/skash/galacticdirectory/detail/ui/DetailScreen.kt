@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.skash.galacticdirectory.designsystem.component.TopBarWithBackNavigation
+import com.skash.galacticdirectory.designsystem.component.navigation.TopBarWithBackNavigation
 import com.skash.galacticdirectory.designsystem.component.template.Screen
 import com.skash.galacticdirectory.detail.presentation.DetailState
 import com.skash.galacticdirectory.detail.presentation.DetailViewModel

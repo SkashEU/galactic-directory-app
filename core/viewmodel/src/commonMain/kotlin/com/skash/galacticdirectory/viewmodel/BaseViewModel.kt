@@ -19,10 +19,6 @@ abstract class BaseViewModel<State : Any, Intent> : StateViewModel<State, Intent
         eventBus = if (useEventBus) resolveEventBus() else null,
     )
 
-    protected fun showSnackbar(message: String) {
-        sendUIEvent(UIEvent.SnackBar(message))
-    }
-
     private companion object Companion : KoinComponent {
         fun resolveEventBus(): EventBus<UIEvent> = get()
 

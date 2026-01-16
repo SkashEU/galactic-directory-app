@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b3eb387c7d26dad4b305834fbcc55f8a",
+    "identityHash": "5c5ae2e4cbcfbe429c19cbd05cfb2fe4",
     "entities": [
       {
-        "tableName": "people",
+        "tableName": "characters",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `birthYear` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
@@ -64,7 +64,7 @@
       },
       {
         "tableName": "detailed_characters",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `gender` TEXT NOT NULL, `height` INTEGER NOT NULL, `mass` INTEGER NOT NULL, `hairColor` TEXT NOT NULL, `skinColor` TEXT NOT NULL, `eyeColor` TEXT NOT NULL, `birthYear` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, `homeworldId` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`homeworldId`) REFERENCES `planets`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `gender` TEXT NOT NULL, `height` INTEGER NOT NULL, `mass` INTEGER NOT NULL, `hairColor` TEXT NOT NULL, `skinColor` TEXT NOT NULL, `eyeColor` TEXT NOT NULL, `birthYear` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, `homeworldId` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -147,19 +147,6 @@
             ],
             "orders": [],
             "createSql": "CREATE INDEX IF NOT EXISTS `index_detailed_characters_homeworldId` ON `${TABLE_NAME}` (`homeworldId`)"
-          }
-        ],
-        "foreignKeys": [
-          {
-            "table": "planets",
-            "onDelete": "SET NULL",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "homeworldId"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
           }
         ]
       },
@@ -250,7 +237,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b3eb387c7d26dad4b305834fbcc55f8a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5c5ae2e4cbcfbe429c19cbd05cfb2fe4')"
     ]
   }
 }

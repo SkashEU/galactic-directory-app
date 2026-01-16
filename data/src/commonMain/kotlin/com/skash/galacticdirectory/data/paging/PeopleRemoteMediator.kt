@@ -7,7 +7,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.useWriterConnection
 import com.skash.forge.network.response.ApiResponse
 import com.skash.galacticdirectory.data.database.AppDatabase
-import com.skash.galacticdirectory.data.database.entity.PersonEntity
+import com.skash.galacticdirectory.data.database.entity.CharacterEntity
 import com.skash.galacticdirectory.data.database.entity.RemoteKeys
 import com.skash.galacticdirectory.data.network.service.SwapiService
 
@@ -16,10 +16,10 @@ class PeopleRemoteMediator(
     private val query: String,
     private val swapiService: SwapiService,
     private val database: AppDatabase
-) : RemoteMediator<Int, PersonEntity>() {
+) : RemoteMediator<Int, CharacterEntity>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, PersonEntity>
+        state: PagingState<Int, CharacterEntity>
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -62,7 +62,7 @@ class PeopleRemoteMediator(
                         RemoteKeys(id = id, prevKey = prevKey, nextKey = nextKey)
                     }
                     val entities = people.results.map { personDto ->
-                        PersonEntity(
+                        CharacterEntity(
                             id = extractIdFromUrl(personDto.url),
                             name = personDto.name,
                             birthYear = personDto.birthYear
@@ -82,17 +82,17 @@ class PeopleRemoteMediator(
         return url.trimEnd('/').substringAfterLast('/').toInt()
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, PersonEntity>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, CharacterEntity>): RemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { person -> database.getRemoteKeysDao().remoteKeysId(person.id) }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, PersonEntity>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, CharacterEntity>): RemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { person -> database.getRemoteKeysDao().remoteKeysId(person.id) }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, PersonEntity>): RemoteKeys? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, CharacterEntity>): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 database.getRemoteKeysDao().remoteKeysId(id)

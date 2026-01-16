@@ -12,8 +12,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.skash.galacticdirectory.designsystem.component.ComponentPreviewTemplate
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 import com.skash.galacticdirectory.designsystem.component.template.Page
+import com.skash.galacticdirectory.resources.Res
+import com.skash.galacticdirectory.resources.favorites_empty_description
+import com.skash.galacticdirectory.resources.favorites_empty_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun EmptyFavoritesPage() {
@@ -23,7 +27,7 @@ internal fun EmptyFavoritesPage() {
     ) {
 
         Text(
-            text = "These are not the favorites you're looking for.",
+            text = stringResource(Res.string.favorites_empty_title),
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
@@ -32,7 +36,7 @@ internal fun EmptyFavoritesPage() {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Your collection is as empty as the deserts of Tatooine.\nExplore the galaxy and tap the heart icon to add some!",
+            text = stringResource(Res.string.favorites_empty_description),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,

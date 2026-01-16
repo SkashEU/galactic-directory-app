@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.skash.galacticdirectory.designsystem.component.ComponentPreviewTemplate
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 
 @Composable
 fun Screen(

@@ -1,4 +1,4 @@
-package com.skash.galacticdirectory.designsystem.component
+package com.skash.galacticdirectory.designsystem.component.card
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 import com.skash.galacticdirectory.designsystem.theme.Spacing
 
 @Composable

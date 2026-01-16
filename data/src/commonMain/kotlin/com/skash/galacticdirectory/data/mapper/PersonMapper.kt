@@ -2,7 +2,7 @@ package com.skash.galacticdirectory.data.mapper
 
 import com.skash.galacticdirectory.data.database.entity.CharacterWithDetailsRelation
 import com.skash.galacticdirectory.data.database.entity.DetailedCharacterEntity
-import com.skash.galacticdirectory.data.database.entity.PersonEntity
+import com.skash.galacticdirectory.data.database.entity.CharacterEntity
 import com.skash.galacticdirectory.data.database.entity.PlanetEntity
 import com.skash.galacticdirectory.data.database.entity.SpeciesEntity
 import com.skash.galacticdirectory.data.network.response.CharacterResponse
@@ -13,13 +13,13 @@ import com.skash.galacticdirectory.domain.model.DetailedCharacter
 import com.skash.galacticdirectory.domain.model.Planet
 import com.skash.galacticdirectory.domain.model.Species
 
-fun PersonEntity.toCharacter(): Character = Character(
+fun CharacterEntity.toDomain(): Character = Character(
     id = id,
     name = name,
     birthYear = birthYear
 )
 
-fun CharacterResponse.toDetailedCharacter() = DetailedCharacter(
+fun CharacterResponse.toDomain() = DetailedCharacter(
     id = url.extractId(),
     gender = gender,
     name = name,

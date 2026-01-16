@@ -1,4 +1,4 @@
-package com.skash.galacticdirectory.designsystem.component
+package com.skash.galacticdirectory.designsystem.component.input
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

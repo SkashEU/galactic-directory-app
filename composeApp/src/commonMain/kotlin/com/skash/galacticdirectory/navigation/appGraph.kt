@@ -8,7 +8,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 
-fun NavGraphBuilder.appGraph() {
+internal fun NavGraphBuilder.appGraph() {
     composable<Screen.Details> {
         val parameter = it.toRoute<Screen.Details>()
         DetailScreen(viewModel = koinViewModel(parameters = { parametersOf(parameter.characterId) }))

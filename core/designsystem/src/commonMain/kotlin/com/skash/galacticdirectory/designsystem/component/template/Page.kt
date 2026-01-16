@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
-import com.skash.galacticdirectory.designsystem.component.ComponentPreviewTemplate
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 import com.skash.galacticdirectory.designsystem.theme.Spacing
 
 @Composable

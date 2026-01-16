@@ -3,4 +3,24 @@
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_favorites">Favorites</string>
 
+    <string name="detail_stat_height">Height</string>
+    <string name="detail_stat_height_unit">cm</string>
+    <string name="detail_stat_mass">Mass</string>
+    <string name="detail_stat_mass_unit">kg</string>
+    <string name="detail_stat_hair_color">Hair Color</string>
+    <string name="detail_stat_skin_color">Skin Color</string>
+    <string name="detail_stat_eye_color">Eye Color</string>
+    <string name="detail_stat_birth_year">Birth Year</string>
+    <string name="detail_favorite_add">Add to favorites</string>
+    <string name="detail_favorite_remove">Remove from favorites</string>
+    <string name="detail_section_homeworld">Homeworld</string>
+    <string name="detail_section_species">Species</string>
+
+    <string name="detail_error_archives_incomplete">Impossible! Perhaps the archives are incomplete.</string>
+    <string name="detail_error_lost_page">Lost a page, we have. How embarrassing.\nWe couldn\'t find the data you were looking for.</string>
+    <string name="detail_error_return_to_base">Return to Base</string>
+
+    <string name="favorites_empty_title">These are not the favorites you\'re looking for.</string>
+    <string name="favorites_empty_description">Your collection is as empty as the deserts of Tatooine.\nExplore the galaxy and tap the heart icon to add some!</string>
+
 </resources>

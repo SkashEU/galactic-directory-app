@@ -1,4 +1,4 @@
-package com.skash.galacticdirectory.designsystem.component
+package com.skash.galacticdirectory.designsystem.component.preview
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope

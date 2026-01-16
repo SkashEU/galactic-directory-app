@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SearchOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,8 +17,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.skash.galacticdirectory.designsystem.component.ComponentPreviewTemplate
+import com.skash.galacticdirectory.designsystem.component.preview.ComponentPreviewTemplate
 import com.skash.galacticdirectory.designsystem.component.template.Page
+import com.skash.galacticdirectory.resources.Res
+import com.skash.galacticdirectory.resources.detail_error_archives_incomplete
+import com.skash.galacticdirectory.resources.detail_error_lost_page
+import com.skash.galacticdirectory.resources.detail_error_return_to_base
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun EntityNotAvailablePage(
@@ -40,7 +44,7 @@ internal fun EntityNotAvailablePage(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Impossible! Perhaps the archives are incomplete.",
+            text = stringResource(Res.string.detail_error_archives_incomplete),
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
@@ -49,7 +53,7 @@ internal fun EntityNotAvailablePage(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Lost a page, we have. How embarrassing.\nWe couldn't find the data you were looking for.",
+            text = stringResource(Res.string.detail_error_lost_page),
             style = MaterialTheme.typography.bodyLarge,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center,
@@ -61,7 +65,7 @@ internal fun EntityNotAvailablePage(
         Button(
             onClick = onClickBack,
         ) {
-            Text(text = "Return to Base")
+            Text(text = stringResource(Res.string.detail_error_return_to_base))
         }
     }
 }
