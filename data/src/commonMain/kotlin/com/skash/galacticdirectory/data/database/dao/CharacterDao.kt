@@ -28,7 +28,7 @@ interface CharacterDao {
 
     @Transaction
     @Query("SELECT * FROM detailed_characters WHERE id = :characterId")
-    fun getCharacterWithDetails(characterId: Int): CharacterWithDetailsRelation?
+    suspend fun getCharacterWithDetails(characterId: Int): CharacterWithDetailsRelation?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(character: DetailedCharacterEntity)
