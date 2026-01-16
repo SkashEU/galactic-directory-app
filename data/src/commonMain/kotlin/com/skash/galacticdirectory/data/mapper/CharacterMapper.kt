@@ -5,7 +5,7 @@ import com.skash.galacticdirectory.data.database.entity.DetailedCharacterEntity
 import com.skash.galacticdirectory.data.database.entity.CharacterEntity
 import com.skash.galacticdirectory.data.database.entity.PlanetEntity
 import com.skash.galacticdirectory.data.database.entity.SpeciesEntity
-import com.skash.galacticdirectory.data.network.response.CharacterResponse
+import com.skash.galacticdirectory.data.network.response.PeopleResponse
 import com.skash.galacticdirectory.data.util.extractId
 import com.skash.galacticdirectory.domain.model.Character
 import com.skash.galacticdirectory.domain.model.CharacterWithDetails
@@ -19,7 +19,7 @@ fun CharacterEntity.toDomain(): Character = Character(
     birthYear = birthYear
 )
 
-fun CharacterResponse.toDomain() = DetailedCharacter(
+fun PeopleResponse.toDomain() = DetailedCharacter(
     id = url.extractId(),
     gender = gender,
     name = name,

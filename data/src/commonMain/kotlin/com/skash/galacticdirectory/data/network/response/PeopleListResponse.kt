@@ -13,5 +13,5 @@ data class PeopleListResponse(
     @SerialName("previous")
     val previous: String?,
     @SerialName("results")
-    val results: List<People>
+    val results: List<PeopleListItemResponse>
 )

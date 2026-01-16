@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CharacterResponse(
+data class PeopleListItemResponse(
     @SerialName("birth_year")
     val birthYear: String,
     @SerialName("created")
@@ -23,7 +23,7 @@ data class CharacterResponse(
     @SerialName("height")
     val height: String,
     @SerialName("homeworld")
-    val homeworld: String? = null,
+    val homeworld: String,
     @SerialName("mass")
     val mass: String,
     @SerialName("name")

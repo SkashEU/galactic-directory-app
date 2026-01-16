@@ -5,7 +5,7 @@ import com.skash.forge.network.client.execute
 import com.skash.forge.network.response.ApiResponse
 import com.skash.galacticdirectory.data.mapper.toDomain
 import com.skash.galacticdirectory.data.network.endpoint.Endpoint
-import com.skash.galacticdirectory.data.network.response.CharacterResponse
+import com.skash.galacticdirectory.data.network.response.PeopleResponse
 import com.skash.galacticdirectory.data.network.response.PeopleListResponse
 import com.skash.galacticdirectory.data.network.response.PlanetResponse
 import com.skash.galacticdirectory.data.network.response.SpeciesResponse
@@ -32,7 +32,7 @@ class SwapiService(
     }
 
     suspend fun getCharacterById(id: Int): ApiResponse<DetailedCharacter> {
-        return httpClient.execute<CharacterResponse, DetailedCharacter>(
+        return httpClient.execute<PeopleResponse, DetailedCharacter>(
             mapper = { it.toDomain() },
             requestBuilder = {
                 get(Endpoint.People.Details(id))
