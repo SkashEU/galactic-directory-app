@@ -69,7 +69,7 @@ fun StatRow(item: StatItem) {
                 }
                 item.unit?.let {
                     withStyle(SpanStyle(fontSize = 12.sp)) {
-                        append(" $it")
+                        append(" ${stringResource(it)}")
                     }
                 }
             }

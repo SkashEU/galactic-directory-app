@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.skash.forge.network.response.ApiResponse
 import com.skash.galacticdirectory.data.database.AppDatabase
+import com.skash.galacticdirectory.data.exception.EntityNotCachedException
 import com.skash.galacticdirectory.data.mapper.toDomain
 import com.skash.galacticdirectory.data.mapper.toEntity
 import com.skash.galacticdirectory.data.network.service.SwapiService
@@ -72,7 +73,7 @@ class CharacterRepositoryImpl(
         if (characterResponse !is ApiResponse.Success && database.getPersonDao()
                 .getCharacterWithDetails(characterId) == null
         ) {
-            throw Exception("Refresh failed with empty cache...")
+            throw EntityNotCachedException()
         }
 
         if (characterResponse is ApiResponse.Success) {
